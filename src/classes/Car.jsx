@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+// Car should be capital case
 class Car extends React.Component {
   constructor(props) {
     //props are added to this class using parent constructor
@@ -8,6 +9,7 @@ class Car extends React.Component {
     this.changeColor = (bcolor) => {
       this.setState({ color: bcolor });
     };
+    // this.state should be initialized in the constructor
     this.state = {
       brand: 'Toyota',
       model: 'Corolla',
@@ -15,6 +17,7 @@ class Car extends React.Component {
      // year: props.year || '2021', // Default to 2021 if no year is provided
     };
   }
+
   render() {
     return ( 
     <>
@@ -29,12 +32,24 @@ class Car extends React.Component {
 class Garage extends React.Component{
   constructor(props){
     super(props);
+    this.state={
+      year: 2002,
+    }
   }
+  
+//exectuted just before render method
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.year == prevState.year) {
+      return { year: nextProps.year };
+    }
+    return null;
+  }
+
   render(){
     return (
     <>
     <h2>Welcome to the Garage!</h2>
-    <Car year={this.props.year} />
+    <Car year={this.state.year} />
     </>
     )
 
