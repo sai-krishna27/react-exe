@@ -44,6 +44,12 @@ class Garage extends React.Component{
     }
     return null;
   }
+// executed just after the component is rendered
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({year: "2025"})
+    }, 1000);
+  }
 
   render(){
     return (
